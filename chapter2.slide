@@ -43,7 +43,20 @@ https://github.com/pyod
 * func type
 .background ./images/whitebg.png
 
-    type area func(float64, float64) float64 
+    type areaFunc func(float64, float64) float64 
+
+#############################################
+
+* defer
+
+A defer statement defers the execution of a function until the surrounding function returns.
+
+The deferred call's arguments are evaluated immediately, but the function call is not executed until the surrounding function returns.
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
 
 #############################################
 
@@ -87,9 +100,21 @@ defer is stack
 * Exercise
 .background ./images/whitebg.png
 
-    Make an API to generate JWT token
+    Make an API to generate JWT token that will expired in 5 minutes
 
-    Make a Wrapper for FizzBuzz handler to validate JWT
+    GET http://localhost:8080/token
+
+    response:
+
+    {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+    }
+
+    Validate JWT in FizzBuzzHandler
+
+    GET http://localhost:8080/fizzbuzz/3
+
+    Header["Authorization"]: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
     
 #############################################
 
@@ -97,11 +122,12 @@ defer is stack
 .background ./images/whitebg.png
 
     type rectangle struct {
-        w,l float64
+        width float64
+        length float64
     }
 
     func (r rectangle) area() float64 {
-        return r.w * r.l
+        return r.width * r.length
     }
 
 #############################################
@@ -110,11 +136,12 @@ defer is stack
 .background ./images/whitebg.png
 
     type rectangle struct {
-        w,l float64
+        width float64
+        length float64
     }
 
     func (r *rectangle) area() float64 {
-        return r.w * r.l
+        return r.width * r.length
     }
 
 #############################################
@@ -133,7 +160,7 @@ defer is stack
 * Exercise
 .background ./images/whitebg.png
 
-change FizzBuzz to OOP like
+change FizzBuzz to OOP style
 
     fb := fizzbuzz.New(15)
     fb.String()
@@ -169,10 +196,24 @@ empty interface
 
 #############################################
 
+* interface
+.background ./images/whitebg.png
+
+.play ./example/interface/static_type.go
+
+#############################################
+
 * interface: type assertion
 .background ./images/whitebg.png
 
 .play ./example/interface/assertions.go
+
+#############################################
+
+* switch
+.background ./images/whitebg.png
+
+.play ./example/fizzbuzz_switch.go
 
 #############################################
 
@@ -192,23 +233,11 @@ To define a set of method signatures
     An interface type defines a set 
     of methods:
 
-
-    type areaer interface {
-        area() int
-    }
-
-
-`Interfaces` are `implemented` `implicitly`
-
-#############################################
-
-* interface: Stringer
-
-.background ./images/whitebg.png
-
     type Stringer interface {
         String() string
     }
+
+`Interfaces` are `implemented` `implicitly`
 
 #############################################
 
@@ -222,13 +251,45 @@ To define a set of method signatures
 
 #############################################
 
+* interface
+.background ./images/whitebg.png
+
+*Interface* *names*
+
+By convention, one-method interfaces are named by the method name plus an -er suffix or similar modification to construct an agent noun: Reader, Writer, Formatter, CloseNotifier etc.
+
+    type areaer interface {
+        area() int
+    }
+
+#############################################
+
 * Exercise
 
-    add a new API random a number and return FizzBuzz then test it
+    add a new API random a number 1-100 and return FizzBuzz then test it
+
+    GET http://localhost:8080/fizzbuzzr
+
     {
         "number": 30000,
         "message": "FizzBuzz"
     }
+
+#############################################
+
+* method on function
+
+    type IntnFunc func(int) int
+
+    func (fn IntnFunc) Intn(n int) int {
+        return fn(n)
+    }
+
+#############################################
+
+* Note
+
+    Intn is interesting
 
 #############################################
 
@@ -285,3 +346,9 @@ keyword `chan`
 .background ./images/whitebg.png
 .play ./example/functions/closure2.go /func main/,/} // END/
 
+#############################################
+
+* Exercise
+.background ./images/whitebg.png
+
+    Make a Wrapper for FizzBuzz handler to validate JWT

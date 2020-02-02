@@ -3,10 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	counter := factory()
-	fmt.Println(counter())
-	fmt.Println(counter())
-	fmt.Println(counter())
+	fn := factory()
+	fmt.Println(fn())
+	fmt.Println(fn())
+	fmt.Println(fn())
 }
 
 func factory() func() int {

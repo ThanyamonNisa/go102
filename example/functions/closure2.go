@@ -3,13 +3,13 @@ package main
 import "fmt"
 
 func main() {
-	up, get := factory()
-	up()
-	up()
-	fmt.Println(get())
+	fn1, fn2 := factory()
+	fn1()
+	fn1()
+	fmt.Println(fn2())
 
-	up()
-	fmt.Println(get())
+	fn1()
+	fmt.Println(fn2())
 }
 
 func factory() (func(), func() int) {
