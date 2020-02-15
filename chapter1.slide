@@ -123,6 +123,8 @@ Variable declaration
     var i int
     var i int = 9
 
+    i := 9
+
 #############################################
 
 * Basic syntax
