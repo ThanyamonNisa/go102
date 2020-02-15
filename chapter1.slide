@@ -417,7 +417,6 @@ make it first
     s := []int{1, 2, 3, 4, 5}
     s = append(s, 6, 7, 8)
 
-
 #############################################
 
 * Exercise
@@ -486,7 +485,6 @@ make it first
 
 open a file oscar_age_male.csv
 print any actors name who got the oscar more than one time
-
 
     Marlon Brando
     Daniel Day-Lewis
@@ -575,6 +573,12 @@ Unlike C, Go has no pointer arithmetic.
 .background ./images/whitebg.png
 
 pick a Web Framework to make the FizzBuzz API
+
+request:
+
+    {
+        "number": 3
+    }
 
 response:
 
