@@ -303,7 +303,7 @@ By convention, one-method interfaces are named by the method name plus an -er su
 * goroutine
 .background ./images/whitebg.png
 
-.play ./example/go/wait.go /^func main/,
+.play ./example/go/wait.go /^var wg /,
 
 #############################################
 
